@@ -1,0 +1,69 @@
+2. Bitonic Sequence
+
+Given a list of random integers, the given function will convert it into a bitonic sequence:
+
+vector<int> bitonicSequence(vector<int> array){
+   sort(array.begin(), array.end());
+   int n = array.size();
+   vector<int> ans(n);
+   int i=0, j=n-1;
+   int k=0;
+   while(i<=j){
+      ans[i] = array[k];
+      i++; k++;
+      if(i<j) {ans[j] = array[k];
+      j--; k++;}
+   }
+   return ans;
+}
+4. Prime Searcher:
+
+bool isPrime(int n){
+    bool P = true;
+
+    if (n == 0 || n == 1) {
+        P = false;
+    }
+    else {
+        for (int i = 2; i <= n / 2; ++i) {
+            if (n % i == 0) {
+                P = false;
+                break;
+            }
+        }
+    }
+    return P;
+}
+bool primeSearcher(vector<int> arr){
+    int n = arr.size();
+    for(auto i : arr){//use of iterators, instead of raw for loop
+        if(isPrime(i)){
+            return true;
+        }
+    }
+    return false;
+}
+6. BONUS CHALLENGE:
+
+int trap(vector<int>& height) {
+        int n = height.size();
+        int water = 0;
+        if(n==0){
+            return water;
+        }
+        int left[n], right[n];
+        int mx = 0;
+        for(int i=0;i<n;i++){
+            mx = max(mx, height[i]);
+            left[i] = mx;
+        }
+        mx = 0;
+        for(int i=n-1;i>=0;i--){
+            mx = max(mx,height[i]);
+            right[i] = mx;
+        }
+        for(int i=0;i<n;i++){
+            water += min(left[i], right[i]) - height[i];
+        }
+        return water;
+}
